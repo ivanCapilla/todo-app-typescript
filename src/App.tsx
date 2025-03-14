@@ -1,32 +1,25 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Todos } from './Components/Todos'
 import { type TodoId, type Todo as TodoType, type FilterValue, type TodoTitle } from './types'
 import { TODO_FILTERS } from './consts'
 import { Footer } from './Components/Footer'
 import { Header } from './Components/Header'
 
-
-const mockTodos = [
-  {
-    id: '1',
-    title: 'Todo 1',
-    completed: false,
-  },
-  {
-    id: '2',
-    title: 'Todo 2',
-    completed: true,
-  },
-  {
-    id: '3',
-    title: 'Todo 3',
-    completed: false,
-  },
-]
+const LOCAL_STORAGE_KEY = 'todos'
 
 const App: React.FC = () => {
-  const [todos, setTodos] = useState(mockTodos)
+
+  const [todos, setTodos] = useState<TodoType[]>(()=>{
+    const saveTodos = localStorage.getItem(LOCAL_STORAGE_KEY)
+    return saveTodos ? JSON.parse(saveTodos) : []
+  })
+
   const [filterSelected, setFilterSelected] = useState<FilterValue>(TODO_FILTERS.ALL)
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos))
+  }, [todos])
+  
 
   const handleRemove = ({ id }: TodoId) => {
     const newTodos = todos.filter((todo) => todo.id !== id)
