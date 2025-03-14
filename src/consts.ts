@@ -6,15 +6,15 @@ export const TODO_FILTERS = {
 
 export const FOOTER_FILTERS_BUTTONS = {
   [TODO_FILTERS.ALL]: {
-    literal: 'Todos',
+    literal: 'Todas',
     href: `/?filter=${TODO_FILTERS.ALL}`,
   },
   [TODO_FILTERS.ACTIVE]: {
-    literal: 'Activos',
+    literal: 'Activas',
     href: `/?filter=${TODO_FILTERS.ACTIVE}`,
   },
   [TODO_FILTERS.COMPLETED]: {
-    literal: 'Completados',
+    literal: 'Completadas',
     href: `/?filter=${TODO_FILTERS.COMPLETED}`,
   },
   
